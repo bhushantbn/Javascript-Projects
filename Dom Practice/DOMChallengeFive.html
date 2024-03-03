@@ -1,0 +1,132 @@
+<!-- Check the checkbox
+
+first JavaScript DOM exercise. Let's start simple.
+Extend the JavaScript code below to interact with the displayed HTML elements. Once you click the button, the checkbox should be checked.
+Confirm your code by clicking the button! -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dom Practice Challenge Five</title>
+  </head>
+  <style>
+    /* The container */
+    body {
+      font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+    }
+    .container-checkbox {
+      display: block;
+      position: relative;
+      padding-left: 35px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      font-size: 22px;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    /* Hide the browser's default checkbox */
+    .container-checkbox input {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    /* Create a custom checkbox */
+    .container-checkbox .checkmark {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 25px;
+      width: 25px;
+      background-color: #eee;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container-checkbox:hover input ~ .checkmark {
+      background-color: #ccc;
+    }
+
+    /* When the checkbox is checked, add a blue background */
+    .container-checkbox input:checked ~ .checkmark {
+      background-color: #2196f3;
+    }
+
+    /* Create the checkmark/indicator (hidden when not checked) */
+    .container-checkbox .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+
+    /* Show the checkmark when checked */
+    .container-checkbox input:checked ~ .checkmark:after {
+      display: block;
+    }
+
+    /* Style the checkmark/indicator */
+    .container-checkbox .checkmark:after {
+      left: 9px;
+      top: 5px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg);
+    }
+    button {
+    padding: 10px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+ </style>
+  <body>
+    <h1>Custom Checkboxes</h1>
+    <label class="container-checkbox"
+      >One
+      <input type="checkbox" id="myCheckbox" />
+      <span class="checkmark"></span>
+    </label>
+    <label class="container-checkbox"
+      >Two
+      <input type="checkbox" id="myCheckbox" />
+      <span class="checkmark"></span>
+    </label>
+    <label class="container-checkbox"
+      >Three
+      <input type="checkbox" id="myCheckbox" />
+      <span class="checkmark"></span>
+    </label>
+    <label class="container-checkbox"
+      >Four
+      <input type="checkbox" id="myCheckbox" />
+      <span class="checkmark"></span>
+    </label>
+    <button id="button">On click</button>
+  </body>
+</html>
+
+<script>
+  const button = document.getElementById("button");
+  button.addEventListener("click", () => {
+    const checkbox = document.querySelectorAll("input[type='checkbox']");
+    checkbox.forEach((element) => {
+        element.checked = !element.checked;
+    });
+  });
+</script>

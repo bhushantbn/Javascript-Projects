@@ -1,0 +1,100 @@
+<!-- Pop the balloons
+
+Make the balloons pop by hovering over them.
+Extend the JavaScript code below to interact with the displayed HTML elements. Every time you hover over a balloon, it should become invisible.
+Your goal is to pop all the balloons one after the other. -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dom Practice Challenge Seven</title>
+  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    #list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    #list li {
+      width: 80px;
+      height: 80px;
+      background-color: #3498db;
+      border-radius: 50%;
+    }
+    #list li:hover {
+      display: none;
+    }
+  </style>
+  <body>
+    <ul id="list">
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </body>
+</html>
+
+<script>
+const balloons = document.querySelectorAll('#list li');
+let currentHoveredBalloon = null;
+
+function hideBalloon(balloon) {
+    balloon.style.transition = 'none';
+    balloon.style.opacity = '0';
+}
+
+function showBalloon(balloon) {
+    balloon.style.transition = '';
+}
+
+function checkBalloons() {
+    const poppedBalloons = Array.from(balloons).filter(balloon => balloon.style.opacity === '0');
+    if (poppedBalloons.length === balloons.length) {
+        document.getElementById('info').style.display = 'none';
+        alert('All balloons popped!');
+    }
+}
+
+balloons.forEach((balloon) => {
+    balloon.addEventListener('mouseover', () => {
+        hideBalloon(balloon);
+        currentHoveredBalloon = balloon;
+    });
+
+    balloon.addEventListener('mouseout', () => {
+        showBalloon(balloon);
+        currentHoveredBalloon = null;
+    });
+
+    balloon.addEventListener('transitionend', () => {
+        if (currentHoveredBalloon === balloon) {
+            checkBalloons();
+        }
+    });
+});
+
+
+
+
+</script>
